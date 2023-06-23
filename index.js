@@ -36,7 +36,7 @@ function likeEndorsements(likeId) {
   const countLikeValue = parseInt(countLikeElement.textContent);
 
   const isLiked = countLikeElement.classList.contains("liked");
-  const newLikeCount = isLiked ? countLikeValue + 1 : countLikeValue - 1;
+  const newLikeCount = isLiked ? countLikeValue - 1 : countLikeValue + 1;
 
   countLikeElement.textContent = newLikeCount;
 
@@ -66,7 +66,7 @@ onValue(dataInDatabase, (snapshot) => {
     const likeCount = itemInDatabase.likeCount || 0;
     const isLiked = itemInDatabase.isLiked || false;
 
-    const heartImgSrc = isLiked ? "/assets/heart.png" : "/assets/heart-purple.png";
+    const heartImgSrc = isLiked ? "/assets/heart-purple.png" : "/assets/heart.png";
 
     endorsementsContainerHtml += `
       <div class="endorsements-html">

@@ -7,7 +7,7 @@ const formEl = document.getElementById("form-el")
 const endorsementsContainer = document.getElementById("endorsements-container")
 
 const appSettings = {
-  databaseURL: "https://champion-6a054-default-rtdb.firebaseio.com/",
+  databaseURL: "https://champion-6a054-default-rtdb.firebaseio.com/"
 }
 
 
@@ -45,7 +45,7 @@ function likeEndorsements(likeId) {
   const endorsementRef = ref(database, `champion/${likeId}`)
   update(endorsementRef, {
     likeCount: newLikeCount,
-    isLiked: !isLiked,
+    isLiked: !isLiked
   })
 }
 

@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"
 import { getDatabase, ref, push, onValue, update } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js"
 
+
 const endorsementsTxt = document.getElementById("text-el")
 const fromEl = document.getElementById("from")
 const toEl = document.getElementById("to")
@@ -73,7 +74,7 @@ onValue(dataInDatabase, (snapshot) => {
             <div class="from-container">
             <h3>From ${itemInDatabase.fromValue}</h3>
             <div class="heart-container" id="toggle-like-${likeId}">
-                <img src="${!isLiked ? '/assets/heart.png' : '/assets/heart-pupple.png'} " alt="heart-icon" class="heart">
+                <img src="${isLiked ? '/assets/heart-pupple.png' : '/assets/heart.png '} " alt="heart-icon" class="heart">
                 <span id="count-like-${likeId}" ${isLiked ? 'class="liked"' : ""}>${likeCount}</span>
             </div>
             </div>

@@ -27,8 +27,8 @@ formEl.addEventListener("submit", (e) => {
     textareaValue: textAreaValue,
     fromValue: fromValue,
     toValue: toValue,
-    likeCount: 7,
-    likeId: Date.now().toString(),
+    likeCount: 5,
+    likeId: Date.now().toString()
   })
   clearInputsFields()
 })
@@ -60,33 +60,35 @@ endorsementsContainer.addEventListener("click", (event) => {
 })
 
 onValue(dataInDatabase, (snapshot) => {
-  let endorsementsContainerHtml = ""
-  snapshot.forEach((childSnapshot) => {
-    const itemInDatabase = childSnapshot.val()
-    const likeId = childSnapshot.key
-
-    const likeCount = itemInDatabase.likeCount || 0
-    const isLiked = itemInDatabase.isLiked || false
-
-    const heartImgSrc = isLiked ? heartIconPurple : heartIcon
-
-    endorsementsContainerHtml += `
-      <div class="endorsements-html">
-        <h3>To ${itemInDatabase.toValue}</h3>
-        <p>${itemInDatabase.textareaValue}</p>
-        <div class="from-container">
-          <h3>From ${itemInDatabase.fromValue}</h3>
-          <div class="heart-container" id="toggle-like-${likeId}">
-            <img src="${heartImgSrc}" alt="heart-icon" class="heart">
-            <span id="count-like-${likeId}" ${isLiked ? 'class="liked"' : ""}>${likeCount}</span>
+    let endorsementsContainerHtml = []
+    snapshot.forEach((childSnapshot) => {
+      const itemInDatabase = childSnapshot.val()
+      const likeId = childSnapshot.key
+  
+      const likeCount = itemInDatabase.likeCount || 0
+      const isLiked = itemInDatabase.isLiked || false
+  
+      const heartImgSrc = isLiked ? heartIconPurple : heartIcon
+  
+      endorsementsContainerHtml.unshift(`
+        <div class="endorsements-html">
+          <h3>To ${itemInDatabase.toValue}</h3>
+          <p>${itemInDatabase.textareaValue}</p>
+          <div class="from-container">
+            <h3>From ${itemInDatabase.fromValue}</h3>
+            <div class="heart-container" id="toggle-like-${likeId}">
+              <img src="${heartImgSrc}" alt="heart-icon" class="heart">
+              <span id="count-like-${likeId}" ${isLiked ? 'class="liked"' : ""}>${likeCount}</span>
+            </div>
           </div>
         </div>
-      </div>
-    `
-  })
-
-  endorsementsContainer.innerHTML = endorsementsContainerHtml
+      `)
+    })
+  
+    endorsementsContainerHtml = endorsementsContainerHtml.join("")
+    endorsementsContainer.innerHTML = endorsementsContainerHtml
 })
+  
 
 function clearInputsFields() {
   endorsementsTxt.value = ""
